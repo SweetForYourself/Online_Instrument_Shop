@@ -1,0 +1,92 @@
+<head>
+    <script src="{{ url_for('static', filename='js/jquery-3.2.1.min.js') }}" type="text/javascript"></script>
+</head>
+<body onselectstart="return false;">
+
+<link href="../static/css/shopping_cart.css" rel='stylesheet' type='text/css' media="all">
+
+<div class="box" id="box">
+    <div class="toumingzi">
+        <div class="desc">
+            <form action="" method="post">
+                <h1 class="payword1"><span>Order Details:</span></h1>
+                    {% if cart_pay is not none %}
+                        {% for s in showlist %}
+                            <p class="payword"> <img src='{{ s.commodity.pic_path1 }}' alt="" width=100 height=100></p>
+                            <p class="payword"><b class="i18n" contrastName="PRODUCT2">Product:</b>
+                                {% if lang == 'zh_CN' %}
+                                    {{ s.commodity.name_zh }}
+                                {% else %}
+                                    {{ s.commodity.commodity_name }}
+                                {% endif %}
+                            </p>
+                            <b class="i18n" contrastName="NUMBER">Number:</b>
+                            <p class="payword" style="font-size: 24px">{{ s.num }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p class="payword"> <img src='{{ commodity.pic_path1 }}' alt="" width=100 height=100></p>
+                        <p class="payword"><b class="i18n" contrastName="PRODUCT2">Product:</b>
+                            {% if lang == 'zh_CN' %}
+                                {{ commodity.name_zh }}
+                            {% else %}
+                                {{ commodity.commodity_name }}
+                            {% endif %}
+                        </p>
+                        <b class="i18n" contrastName="NUMBER" >Number:</b>
+                        <input style="font-size: 24px" type="text" name="num" placeholder="Please enter..." required=""
+                                   value="{{ num }}">
+                    {% endif %}
+{#                <p class="payword">#}
+{#                    <b>Number :</b>#}
+{#                    <input style="font-size: 24px" type="text"#}
+{#                           name="num" placeholder="Please enter..." required="" value="{% if cart_pay is not none %}{{ cart_pay.commodity_num }}{% else %}1{% endif %}">#}
+                        {#                               </span><input name="box" style="width:50px;position:absolute;left:20px;">#}
+
+                    </select>
+                </p>
+                <p class="payword">
+                    <b class="i18n" contrastName="ADDRESS">Delivery address: </b>
+                    <input style="font-size: 24px" type="text"
+                           name="address" placeholder="Please enter..." required="" value={{ profile.address }}>
+                </p>
+                <p class="payword">
+                    <b class="i18n" contrastName="PHONE">Phone number: </b>
+                    <input style="font-size: 24px" type="text"
+                           name="phone_num" placeholder="Please enter..." required="" value={{ profile.phone_num }}>
+                </p>
+                <p class="payword">
+                    <b class="i18n" contrastName="CONSIGNEE">Consignee name: </b>
+                    <input style="font-size: 24px" type="text"
+                           name="name" placeholder="Please enter..." required="" value={{ profile.name }}>
+                </p>
+                <p class="payword">
+                    <b class="i18n" contrastName="TRANSPORT">Transport: </b>
+                    <select style="font-size: 24px" value="1" name="transport">
+                        <option value="1" class="i18n">
+                            {% if lang == 'zh_CN' %}
+                                送货到家
+                            {% else %}
+                                delivery home
+                            {% endif %}
+                        </option>
+                        <option value="2" class="i18n" contrastName="PICK_UP">pick up at the store</option>
+                    </select>
+                </p>
+
+                <button class="paybt i18n" type="submit"  contrastName="CONFIRM_PAY">Confirm pay</button>
+                <button class="paybt i18n" onclick="javascript:history.back(-1);{return false}" contrastName="CANCEL_PAY">Cancel pay</button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function (){
+      jump();
+    });
+</script>
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/i18n/language.js"></script>
+<script src="../static/js/i18n/jquery.i18n.properties.js"></script>

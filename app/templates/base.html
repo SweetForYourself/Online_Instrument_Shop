@@ -1,0 +1,247 @@
+<style>
+    .translate_button{
+        background: transparent;
+        border: none;
+        text-decoration: underline;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .translate_button:focus{outline:0}
+</style>
+<div id="loading">
+    <div id="loading_bg">
+        <div class="loader">Loading...</div>
+    </div>
+</div>
+
+<head>
+    <title>Doraemon Instrument Store</title>
+</head>
+
+<body style="overflow-x:hidden">
+<div class="header-outs" id="home">
+    <div class="header-bar">
+        <div class="info-top-grid">
+            <div class="info-contact-agile">
+                <ul>
+                    <li>
+                        <span class="fas fa-phone-volume"></span>
+                        <p>13718691558</p>
+                    </li>
+                    <li>
+                        <span class="fas fa-envelope"></span>
+                        <p><a href="mailto:info@example.com">519315516@qq.com</a></p>
+                    </li>
+                    <li>
+                        <button onclick="execI18n()" class="i18n translate_button" contrastName="TRANSLATE">
+                            切换为中文
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="hedder-up row">
+                <div class="col-lg-3 col-md-3 logo-head" style="display: flex; justify-content: flex-start;width: 55%">
+                    <img src='../static/logo/logo_white.png' alt="" style="height: 44px;margin-right: 4px;">
+                    <h1><a class="navbar-brand i18n" href="/main_page" contrastName="SHOP_NAME">Instrument-Shop</a></h1>
+                </div>
+                <div class="col-lg-5 col-md-6 search-right" style="width: 45%">
+                    <form class="form-inline my-lg-0" action="{{ url_for('search') }}" method="post" style="justify-content: flex-end; margin-right: 10px;">
+                        <input class="form-control mr-sm-2" placeholder="Search" id="search_result" style="width: 50%"
+                               name="search_result">
+                        <button class="btn i18n" contrastName="SEARCH">Search</button>
+                    </form>
+                </div>
+                <div class="col-lg-4 col-md-3 right-side-cart">
+                    <div class="cart-icons">
+                        <ul style="display: flex; justify-content: right">
+
+                            <li class="enjoy" style="width: 270px;line-height: 33px">
+                                <u class="i18n" contrastName="EYOM">Enjoy your own music!</u>
+                            </li>
+
+                            {% if authority == 0 %}
+                            <li>
+                                <button type="button" onclick="location.href='/collection'">
+                                    <span class="far fa-heart"></span>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="top_toys_cart" type="button"
+                                        onclick="location.href='/ShoppingCart'">
+                                    <span class="fas fa-cart-arrow-down"></span>
+                                </button>
+                            </li>
+                            {% endif %}
+                            <li>
+                                {% if islogin %}
+                                    <button type="button" onclick="location.href='/home'">
+                                       <span class="far">
+                                            {% if icon == "NULL" %}
+                                                <img src='{{ avatars.default(size='l') }}' alt="" width=33 height=33>
+                                            {% else %}
+                                                <img src='{{ icon }}' alt="" width=33 height=33>
+                                            {% endif %}
+                                       </span>
+
+                                    </button>
+
+                                {% else %}
+                                    <button type="button" onclick="location.href='/login'">
+                                        <span class="far fa-user"></span></button>
+                                {% endif %}
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                <ul class="navbar-nav ">
+                    {% if authority !=1 %}
+                    <li class="nav-item active">
+                        <a class="nav-link i18n" onclick="location.href='/main_page'" contrastName="HOME">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% endif %}
+
+                    <li class="nav-item">
+                        {% if authority !=1 %}
+                        <a onclick="location.href='/shop'" class="nav-link i18n" contrastName="SHOPNOW">Shop Now</a>
+                        {% endif %}
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle i18n" href="#" id="navbarDropdown1" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" contrastName="PRODUCT">
+                            Product
+                        </a>
+
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for type in types %}
+                                <a class="nav-link" href="/product?type={{ type }}">{{ types[type] }}</a>
+                            {% endfor %}
+                        </div>
+
+
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        {% if authority ==1 %}
+                            <a class="nav-link i18n" href="/adjust" contrastName="CUSTOMER">
+                                Customer
+                            </a>
+                        {% else %}
+                            <a class="nav-link i18n" href="/contact" contrastName="SERVICE">
+                                Service
+                            </a>
+                        {% endif %}
+
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% if authority !=1 %}
+                                <a onclick="location.href='/contact'" class="nav-link i18n" contrastName="CONTACT">Contact</a>
+                                <a onclick="location.href='/about'" class="nav-link i18n" contrastName="ABOUT">About</a>
+                            {% endif %}
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        {% for message in get_flashed_messages() %}
+            <div id="ahhh" class="show">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% block content %}{% endblock %}
+</body>
+</html>
+
+<script>
+    var a = document.getElementById("ahhh");
+    setTimeout(function () {//定时器
+            a.className = "unshow";
+        },
+        2000);
+
+    document.onreadystatechange=function () {
+          if (document.readyState !== "complete"){
+              $("body").hide();
+          }
+          if (document.readyState==="complete"){
+
+               loadingFade();
+          }
+}
+    function loadingFade() {
+         var opacity=1;
+         //var loadingPage=document.getElementById('loading');
+         var loadingBackground=document.getElementById('loading_bg');
+         var time=setInterval(function () {
+              if (opacity<=0){
+                   clearInterval(time);
+                   //loadingPage.remove();
+                   $('#loading').remove();
+                   $("body").show();
+
+              }
+
+              loadingBackground.style.opacity=opacity;
+              opacity-=0.4;
+         },100);
+    }
+
+
+
+</script>
+<script type="text/javascript">
+    var idex = 0;
+    jQuery(document).ready(function($) {
+        $("body").click(function(e) {
+            var key = new Array("♪","♫","♩","♬");
+            var $i = $("<span></span>").text(key[idex]);
+            idex = Math.floor(Math.random()*4)
+            var x = e.pageX,
+            y = e.pageY;
+            $i.css({
+                "z-index": 5201314,
+                "top": y- 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "font-size": "30px",
+                "color": "rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")"
+            });
+            $("body").append($i);
+            $i.animate({
+                "top": y - 70,
+                "left": x+90,
+                "font-size": 20,
+                "opacity": 0
+            },
+            15*100,
+            function() {
+                $i.remove();
+            });
+        });
+    });
+
+</script>
+
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/i18n/language.js"></script>
+<script src="../static/js/i18n/jquery.i18n.properties.js"></script>
+<link rel="stylesheet" href="../static/css/shop.css">
+
+
+{#缺陷：导航栏中跳转到选择分类之后，相应区域标题并未变色#}

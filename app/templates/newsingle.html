@@ -1,0 +1,342 @@
+{% extends "base.html" %}
+{% block content %}
+      <!--meta tags -->
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="keywords" content="Toys Shop Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+         Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design">
+      <script>
+         addEventListener("load", function () {
+         	setTimeout(hideURLbar, 0);
+         }, false);
+         
+         function hideURLbar() {
+         	window.scrollTo(0, 1);
+         }
+      </script>
+      <!--//meta tags ends here-->
+      <!--booststrap-->
+      <link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+      <!--//booststrap end-->
+      <!-- font-awesome icons -->
+      <link href="../static/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
+      <!-- //font-awesome icons -->
+      <!--Shoping cart-->
+      <link rel="stylesheet" href="../static/css/shop.css" type="text/css">
+      <!--//Shoping cart-->
+      <link rel="stylesheet" type="text/css" href="../static/css/jquery-ui1.css">
+      <link href="../static/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="../static/css/flexslider.css" type="text/css" media="screen">
+      <!--stylesheets-->
+      <link href="../static/css/style.css" rel='stylesheet' type='text/css' media="all">
+
+      <!--//stylesheets-->
+      <!-- banner -->
+      <div class="inner_page-banner one-img">
+      </div>
+      <!--//banner -->
+      <!-- short -->
+      <div class="using-border py-3">
+         <div class="inner_breadcrumb  ml-4">
+            <ul class="short_ls">
+               <li>
+                  <a href="index" class="i18n" contrastName="HOME">Home</a>
+                  <span>/ /</span>
+               </li>
+               <li class="i18n" contrastName="ASP">Add Single Page</li>
+            </ul>
+         </div>
+      </div>
+      <!-- //short-->
+      <!--//banner -->
+      <!--/shop-->
+      <section class="banner-bottom py-lg-5 py-3">
+         <div class="container">
+            <div class="inner-sec-shop pt-lg-4 pt-3">
+               <div class="row">
+
+                  <div class="col-lg-8 single-right-left simpleCart_shelfItem">
+                      {% if modify  %}
+                         <div class="col-lg-4 single-right-left ">
+                            <div class="grid images_3_of_2">
+                                <div class="flexslider1">
+                                    <ul class="slides">
+                                        {% if commodity.pic_path1 is not none %}
+                                            <li data-thumb="{{ commodity.pic_path1 }}">
+                                                <div style="display:flex;justify-content: center"><img
+                                                        src="{{ commodity.pic_path1 }}" data-imagezoom="true" class="img-fluid"
+                                                        alt=" "></div>
+                                            </li>
+                                        {% endif %}
+                                        {% if commodity.pic_path2 is not none %}
+                                            <li data-thumb="{{ commodity.pic_path2 }}">
+                                                <div style="display:flex;justify-content: center"><img
+                                                        src="{{ commodity.pic_path2 }}" data-imagezoom="true" class="img-fluid"
+                                                        alt=" "></div>
+                                            </li>
+                                        {% else %}
+                                            <li data-thumb="{{ commodity.pic_path1 }}">
+                                            <div style="display:flex;justify-content: center"><img
+                                                    src="{{ commodity.pic_path1 }}" data-imagezoom="true" class="img-fluid"
+                                                    alt=" "></div>
+                                            </li>
+                                        {% endif %}
+                                        {% if commodity.pic_path3 is not none %}
+                                            <li data-thumb="{{ commodity.pic_path3 }}">
+                                                <div style="display:flex;justify-content: center"><img
+                                                        src="{{ commodity.pic_path3 }}" data-imagezoom="true" class="img-fluid"
+                                                        alt=" "></div>
+                                            </li>
+                                        {% else %}
+                                            <li data-thumb="{{ commodity.pic_path1 }}">
+                                                <div style="display:flex;justify-content: center"><img
+                                                        src="{{ commodity.pic_path1 }}" data-imagezoom="true" class="img-fluid"
+                                                        alt=" "></div>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                         </div>
+
+                          <form action="" method="post">
+                          <h3 class="i18n" contrastName="PRODUCTNAME">product name:</h3><input class="form-control" type="text" name="product name" placeholder="Please enter..." required="" value={{commodity.commodity_name}}>
+                          <p><span class="item_price i18n" contrastName="STOCK">stock:</span><input class="form-control" type="text" name="quantity" placeholder="Please enter..." required="" value={{commodity.cargo_quantity}}>
+                          <span class="item_price i18n" contrastName="PRICE"> price:</span><input class="form-control" type="text" name="price" placeholder="Please enter..." required="" value={{commodity.price}}>
+                          <span class="item_price i18n" contrastName="TYPE">type:</span><select class="form-control" value="1" name="type">
+                                <option value="1" class="i18n" contrastName="PAINO">piano</option>
+                                <option value="2" class="i18n" contrastName="DRUM">drum</option>
+                            </select>
+
+                           <span class="item_price i18n" contrastName="INTRODUCTION">introduction</span><textarea  class="form-control"  rows="6" name="introduction" placeholder="Please enter..." style="OVERFLOW:hidden" required="" >{{commodity.introduction}}</textarea>
+                          </p>
+                          <button type="submit" class="i18n" contrastName="NEXT"> NEXT</button>
+
+                      </form>
+                      {% else %}
+                          <form action="" method="post">
+                          <h3 class="i18n" contrastName="PRODUCTNAME">product name</h3><input class="form-control" type="text" name="product name" placeholder="Please enter..." required="" >
+                          <p><span class="item_price i18n" contrastName="STOCK">stock</span><input class="form-control" type="text" name="quantity" placeholder="Please enter..." required="" >
+                          <span class="item_price i18n" contrastName="PRICE"> price</span><input class="form-control" type="text" name="price" placeholder="Please enter..." required="" >
+                          <span class="item_price i18n" contrastName="TYPE">type</span><select class="form-control" value="1" name="type">
+                                <option value="1" class="i18n" contrastName="PAINO">piano</option>
+                                <option value="2" class="i18n" contrastName="DRUM">drum</option>
+                                <option value="horn" class="i18n" contrastName="HORN">horn</option>
+                                <option value="trombone" class="i18n" contrastName="TROMBONE">trombone</option>
+                                <option value="trumpet" class="i18n" contrastName="TRUMPET">trumpet</option>
+                                <option value="violin" class="i18n" contrastName="VIOLIN">violin</option>
+                            </select>
+
+                           <span class="item_price i18n" contrastName="INTRODUCTION">introduction</span><textarea  class="form-control"  rows="6" name="introduction" placeholder="Please enter..." style="OVERFLOW:hidden" required="" ></textarea>
+
+
+                          </p>
+                          <button class="paybt i18n"  contrastName="NEXT"> NEXT</button>
+
+                      </form>
+
+                      {% endif %}
+
+
+
+                     </ul>
+                  </div>
+
+                  <!--//tabs-->
+               </div>
+            </div>
+         </div>
+      </section>
+      <!--subscribe-address-->
+     <section class="subscribe">
+         <div class="container-fluid">
+         <div class="row">
+           <div class="col-lg-6 col-md-6 map-info-right px-0 text-center">
+                    <div class="address-gried-2">
+                        <b class="i18n" contrastName="DIS">Doraemon Instrument Store</b>
+                        <p class="i18n" contrastName="GYBCOI">
+                            Give you best choices of instruments!
+                        </p>
+                    </div>
+                </div>
+            <div class="col-lg-6 col-md-6 address-w3l-right text-center">
+<!--               <div class="address-gried ">-->
+<!--                  <span class="far fa-map"></span>-->
+<!--                  <p>25478 Road St.121<br>USA New Hill-->
+<!--                  <p>-->
+<!--               </p></div>-->
+               <div class="address-gried mt-3">
+                  <span class="fas fa-phone-volume"></span>
+                  <p> 13718691558<br></p>
+               </div>
+               <div class=" address-gried mt-3">
+                  <span class="far fa-envelope"></span>
+                  <p><a href="mailto:info@example.com">519315516@qq.com</a>
+<!--                     <br><a href="mailto:info@example.com">info@example2.com</a>-->
+                  </p>
+               </div>
+            </div>
+         </div>
+		 </div>
+      </section>
+      <!--//subscribe-address-->
+
+      <!--//subscribe-->
+      <!-- footer -->
+      <footer class="py-lg-4 py-md-3 py-sm-3 py-3 text-center">
+         <div class="copy-agile-right">
+            <p class="i18n" contrastName="BTTT">Back to the top</p>
+         </div>
+      </footer>
+      <!-- //footer -->
+      <!-- Modal 1-->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <div class="register-form">
+                     <form action="#" method="post">
+                        <div class="fields-grid">
+                           <div class="styled-input">
+                              <input type="text" placeholder="Your Name" name="Your Name" required="">
+                           </div>
+                           <div class="styled-input">
+                              <input type="email" placeholder="Your Email" name="Your Email" required="">
+                           </div>
+                           <div class="styled-input">
+                              <input type="password" placeholder="password" name="password" required="">
+                           </div>
+                           <button type="submit" class="btn subscrib-btnn">Login</button>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- //Modal 1-->
+      <!--jQuery-->
+      <script src="../static/js/jquery-2.2.3.min.js"></script>
+      <!-- newsletter modal -->
+      <!-- cart-js -->
+      <script src="../static/js/minicart.js"></script>
+      <script>
+         toys.render();
+
+         toys.cart.on('toys_checkout', function (evt) {
+         	var items, len, i;
+
+         	if (this.subtotal() > 0) {
+         		items = this.items();
+
+         		for (i = 0, len = items.length; i < len; i++) {}
+         	}
+         });
+      </script>
+      <!-- //cart-js -->
+      <!-- price range (top products) -->
+      <script src="../static/js/jquery-ui.js"></script>
+      <script>
+         //<![CDATA[
+         $(window).load(function () {
+         	$("#slider-range").slider({
+         		range: true,
+         		min: 0,
+         		max: 9000,
+         		values: [50, 6000],
+         		slide: function (event, ui) {
+         			$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+         		}
+         	});
+         	$("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+         }); //]]>
+      </script>
+      <!-- //price range (top products) -->
+      <!-- single -->
+      <script src="../static/js/imagezoom.js"></script>
+      <!-- single -->
+      <!-- script for responsive tabs -->
+      <script src="../static/js/easy-responsive-tabs.js"></script>
+      <script>
+         $(document).ready(function () {
+         	$('#horizontalTab').easyResponsiveTabs({
+         		type: 'default', //Types: default, vertical, accordion
+         		width: 'auto', //auto or any width like 600px
+         		fit: true, // 100% fit in a container
+         		closed: 'accordion', // Start closed if in accordion view
+         		activate: function (event) { // Callback function if tab is switched
+         			var $tab = $(this);
+         			var $info = $('#tabInfo');
+         			var $name = $('span', $info);
+         			$name.text($tab.text());
+         			$info.show();
+         		}
+         	});
+         	$('#verticalTab').easyResponsiveTabs({
+         		type: 'vertical',
+         		width: 'auto',
+         		fit: true
+         	});
+         });
+      </script>
+      <!-- FlexSlider -->
+      <script src="../static/js/jquery.flexslider.js"></script>
+      <script>
+         // Can also be used with $(document).ready()
+         $(window).load(function () {
+         	$('.flexslider1').flexslider({
+         		animation: "slide",
+         		controlNav: "thumbnails"
+         	});
+         });
+      </script>
+      <!-- //FlexSlider-->
+      <!-- start-smoth-scrolling -->
+      <script src="../static/js/move-top.js"></script>
+      <script src="../static/js/easing.js"></script>
+      <script>
+         jQuery(document).ready(function ($) {
+         	$(".scroll").click(function (event) {
+         		event.preventDefault();
+         		$('html,body').animate({
+         			scrollTop: $(this.hash).offset().top
+         		}, 900);
+         	});
+         });
+      </script>
+      <!-- start-smoth-scrolling -->
+      <!-- here stars scrolling icon -->
+      <script>
+         $(document).ready(function () {
+
+         	var defaults = {
+         		containerID: 'toTop', // fading element id
+         		containerHoverID: 'toTopHover', // fading element hover id
+         		scrollSpeed: 1200,
+         		easingType: 'linear'
+         	};
+
+
+         	$().UItoTop({
+         		easingType: 'easeOutQuart'
+         	});
+
+         });
+      </script>
+      <!-- //here ends scrolling icon -->
+      <!-- //smooth-scrolling-of-move-up -->
+      <!--bootstrap working-->
+      <script src="../static/js/bootstrap.min.js"></script>
+      <!-- //bootstrap working-->
+{% endblock %}

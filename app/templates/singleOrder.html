@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .translate_button{
+        background: transparent;
+        border: none;
+        text-decoration: underline;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .translate_button:focus{outline:0}
+</style>
+<head>
+    <title>Personal information</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {#    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">#}
+    {#    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">#}
+    {#    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">#}
+
+    <link rel="stylesheet" href="../static/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/animate.css">
+
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../static/css/magnific-popup.css">
+
+    <link rel="stylesheet" href="../static/css/aos.css">
+
+    <link rel="stylesheet" href="../static/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="../static/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../static/css/jquery.timepicker.css">
+
+
+    <link rel="stylesheet" href="../static/css/flaticon.css">
+    <link rel="stylesheet" href="../static/css/icomoon.css">
+    <link rel="stylesheet" href="../static/css/style-per.css">
+</head>
+<body>
+
+<div class="pic">
+
+    {#      这边要改到下面放头像的地方去#}
+    {#          {% if icon == "NULL" %}#}
+    {#              <img src='{{ avatars.default(size='l') }}' alt="" width=10% height=10%>#}
+    {#          {% else %}#}
+    {#              <img src= {{ icon }} alt="" width=10% height=10%>#}
+    {#          {% endif %}#}
+    {#      这边要改到下面放头像的地方去#}
+
+    {% if user == current_user %} {# 判断用户是不是当前用户 #}
+        <br>
+        <a style="margin-top: 10px" href="/change-avatar/" class="btn btn-primary i18n" contrastName="CHANGE_AVATAR">Change
+            your avatar <span
+                    class="fa fa-edit"></span></a>
+    {% endif %}
+</div>
+
+<div id="colorlib-page">
+    <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+    <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
+        <h1 id="colorlib-logo"><a href="/home">
+                <span>
+                    {% if icon == "NULL" %}
+                        <img src='{{ avatars.default(size='l') }}' alt="" width=100 height=100>
+                    {% else %}
+                        <img src='{{ icon }}' alt="" width=100 height=100>
+                    {% endif %}
+                </span><br>{{ user.user_name }}</a>
+        </h1>
+        <nav id="colorlib-main-menu" role="navigation">
+                            <ul>
+					<li class="colorlib-active"><a href="/home " class="i18n" contrastName="HOME">Home</a></li>
+                    {% if authority != 1 %}
+					<li><a href="/collection" class="i18n" contrastName="COLLECTION">Collection</a></li>
+					<li><a href="/ShoppingCart" class="i18n" contrastName="S_C">Shopping Cart</a></li>
+                    <li><a href="/Orders" class="i18n" contrastName="ORDERS">Orders</a></li>
+                    {% endif %}
+                    {% if authority == 1 %}
+                        <li><a href="/customer" class="i18n" contrastName="CUSTOMER">Customer</a></li>
+                        <li><a href="/productList" class="i18n">Products</a></li>
+                        <li><a href="/Orders" class="i18n" contrastName="ORDERS">Orders</a></li>
+                    {% endif %}
+					<li><a href="/contact" class="i18n" contrastName="SERVICES">Services</a></li>
+                    <li><a href="/CheckTopup" class="i18n" contrastName="TOPUP_L">Top up List</a></li>
+                    <li><button onclick="location.href='/main_page'" class="i18n" contrastName="BACK_FROM_HOME">Come back to Home Page</button> </li>
+				</ul>
+        </nav>
+
+        <div class="colorlib-footer">
+            <button onclick="execI18n()" class="i18n translate_button" contrastName="TRANSLATE">
+                切换为中文
+            </button>
+            <div class="d-flex justify-content-center">
+                <form action="#" class="colorlib-subscribe-form">
+                    <div class="form-group d-flex">
+                        <button onclick="clickToLogout();" class="i18n" contrastName="LOG_OUT_HERE">Log out at
+                            here
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </aside> <!-- END COLORLIB-ASIDE -->
+    <div id="colorlib-main">
+        <section class="ftco-section ftco-bread">
+            <div class="container">
+                <div class="row no-gutters slider-text justify-content-center align-items-center">
+                    <div class="col-md-8 ftco-animate">
+                        <p class="breadcrumbs"><span class="mr-2"><a href="/home" class="i18n"
+                                                                     contrastName="HOME">Home</a></span>
+                            {% if authority != 1 %}
+                            <span class="i18n"><a href="/collection" contrastName="COLLECTION"
+                                                  class="i18n">Collection</a></span>
+                            <span class="mr-2"><a href="/ShoppingCart" class="i18n" contrastName="S_C">Shopping Cart</a></span>
+                            <span class="mr-2"><a href="/Orders" class="i18n" contrastName="ORDERS">Orders</a></span>
+                            {% endif %}
+                            {% if authority == 1 %}
+                            <span class="i18n"><a href="/customer" class="i18n" contrastName="CUSTOMER">Customer</a></span>
+                            <span class="mr-2"><a href="/productList" class="i18n" contrastName="PRODUCTS">Products</a></span>
+                            <span class="mr-2"><a href="/Orders" class="i18n" contrastName="ORDERS">Orders</a></span>
+                            {% endif %}
+                            <span ><a href="/CheckTopup" class="i18n" contrastName="TOPUP_L">Top up List</a></span>
+                        </p>
+                        <h1 class="bread i18n" contrastName="ORDER_DETAILS">Order Details</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="ftco-section-3">
+            <div class="photograhy">
+            </div>
+        </section>
+
+    </div><!-- END COLORLIB-MAIN -->
+</div><!-- END COLORLIB-PAGE -->
+
+<div id="colorlib-main">
+    <section class="ftco-section-no-padding bg-light">
+        <div class="hero-wrap">
+            <div class="overlay"></div>
+            <div class="d-flex align-items-center js-fullheight">
+                <div class="author-image text img d-flex">
+                    <section class="home-slider js-fullheight owl-carousel">
+                        <div class="slider-item js-fullheight"
+                             style="background-image: url({{ order.pic_path }});">
+                            {% if order.urgent == 1 %}
+                                 <span class="product-new-top-left i18n"
+                                          style="background: #c9040c" contrastName="URGENT">Urgent</span>
+                                {% else %}
+                                    <span class="product-new-top-left i18n"
+                                          style="background: #28a745"  contrastName="NORMAL">Normal</span>
+                                {% endif %}
+                            {% if sta == 'Not deliver' %}
+                                <span class="product-new-top i18n"
+                                          style="background: #c9040c" contrastName="NOT_DELIVER">Not deliver</span>
+                            {% elif sta == 'In transit' %}
+                                <span class="product-new-top i18n"
+                                          style="background: #e0a800" contrastName="IN_TRANSIT">In transit</span>
+                            {% elif sta == 'Delivered' %}
+                                <span class="product-new-top i18n"
+                                          style="background: cornflowerblue" contrastName="DELIVERED">Delivered</span>
+                            {% elif sta == 'Signed in' %}
+                                <span class="product-new-top i18n"
+                                          style="background: green" contrastName="SIGNED_IN">Signed in</span>
+                            {% endif %}
+                        </div>
+
+                        {#					      <div class="slider-item js-fullheight" style="background-image:url(../static/image/back2.jpg);">#}
+                        {#					      </div>#}
+                    </section>
+                    {#                            <img src="../static/instruments/piano.jpg">#}
+                </div>
+                <div class="author-info text p-3 p-md-5">
+                    <div class="desc">
+                        <h1 ><span><a class="i18n" contrastName="ORDER">Order</a>{{ order.id }}<a class="i18n" contrastName="DETAILS">Details</a></span>:</h1>
+                        <p class="mb-4"><b class="i18n" contrastName="PRODUCT2">Product:</b> {{ order.commodity_name }}</p>
+                        <p class="mb-4"><b class="i18n" contrastName="PRICE2">Price:</b> ${{ order.price }} </p>
+                        <p class="mb-4" ><b class="i18n" contrastName="NUM">Num:</b> {{ detail.commodity_num }} </p>
+                        <p class="mb-4" ><b class="i18n" contrastName="ADDRESS">Delivery address: </b>{{ order.address }}</p>
+                        {% if order.transport == '1' %}
+                        <p class="mb-4" ><b class="i18n" contrastName="TRANSPORT">Transport: </b><a class="i18n">
+                        {% if lang == 'zh_CN' %}
+                            送货到家
+                        {% else %}
+                            delivery home
+                        {% endif %}
+                        </a> </p>
+                        {% elif order.transport == '2' %}
+                        <p class="mb-4 i18n" ><b class="i18n" contrastName="TRANSPORT">Transport: </b><a class="i18n" contrastName="PICK_UP">pick up at the store</a> </p>
+                        {% endif %}
+                        <p class="mb-4" ><b class="i18n" contrastName="CONSIGNEE">Consignee name: </b>{{ order.name }}</p>
+                        <p class="mb-4" ><b class="i18n" contrastName="PHONE">Phone number: </b>{{ order.phone_num }}</p>
+                        {% if sta != 'Signed in' %}
+                            {% if user1.authority == 0 %}
+                                <button type="button" class="i18n" onclick="location.href = '/edit/{{ order.detail }}'" contrastName="EDIT"><b>Edit</b></button>
+                            {% endif %}
+                        {% endif %}
+
+                        {% if user.authority==0 %}
+                            {% if sta == "Delivered" %}
+                                <form action="order/receive/{{ order.detail }}" method="post">
+                                    <button onclick="{if(confirm('Please reconfirm that your order has been delivered!')){return true;}return false;}"
+                                            class="i18n" contrastName="CONFIRM_RECEIPT">Confirm receipt
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% else %}
+                            {% if sta != 'Signed in' %}
+                                {% if  order.transport != '2'  %}
+                                    <form action="order/urgent/{{ order.detail }}" method="post">
+                                    <button onclick="{if(confirm('Please confirm that you want to change the urgent status！')){return true;}return false;}"
+                                            class="i18n" contrastName="CTUS">Change the urgent status
+                                    </button>
+                                    </form>
+
+                                {% endif %}
+                                <br>
+                                <form action="/status/{{ order.detail }}" method="post">
+                                    <select id="status" onchange="change_country(this.value)"
+                                            class="frm-field required sect" name="status">
+                                        {% if sta == "Not deliver" %}
+                                            <option value="Not deliver" selected>Not deliver</option>
+                                        {% else %}
+                                            <option value="Not deliver">Not deliver</option>
+                                        {% endif %}
+                                        {% if order.transport != '2' %}
+                                            {% if sta == "In transit" %}
+                                                <option value="In transit" selected>In transit</option>
+                                            {% else %}
+                                                <option value="In transit">In transit</option>
+                                            {% endif %}
+                                        {% endif %}
+                                        {% if sta == "Delivered" %}
+                                            <option value="Delivered" selected>Delivered</option>
+                                        {% else %}
+                                            <option value="Delivered">Delivered</option>
+                                        {% endif %}
+                                        {#                                        {% if sta == "Signed in" %}#}
+                                        {#                                            <option value="Signed in" selected>Signed in</option>#}
+                                        {#                                        {% else %}#}
+                                        {#                                            <option value="Signed in">Signed in</option>#}
+                                        {#                                        {% endif %}#}
+                                    </select>
+                                    <br>
+                                    <button onclick="{if(confirm('Please confirm that you want to change the status of this order!')){return true;}return false;}"
+                                            class="i18n" contrastName="COS">Change order status
+                                    </button>
+                                </form>
+                            {% else %}
+                                <div>status: {{ sta }}</div>
+                            {% endif %}
+
+                        {% endif %}
+                        {% if sta != 'Signed in' %}
+                            <form action="order/delete/{{ order.detail }}" method="post">
+                                <button class="cancel i18n"
+                                        onclick="{if(confirm('Please confirm whether you want to cancel the order?')){return true;}return false;}"
+                                        contrastName="CANCEL_ORDER">Cancel order
+                                </button>
+                            </form>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- loader -->
+<div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00"/>
+    </svg>
+</div>
+
+<script>
+    function clickToLogout() {
+        $.post('/api/logout', {}).done(function (response) {
+            let server_code = response['returnValue']
+            if (server_code == 1) {
+                // success set done
+                alert("You have been logged out")
+                window.location.href = '/main_page';
+            } else {
+                alert("You have not been logged out")
+                window.location.href = '/home';
+            }
+        }).fail(function () {
+            console.log("Fail reset");
+        })
+    }
+</script>
+
+
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="../static/js/popper.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/jquery.easing.1.3.js"></script>
+<script src="../static/js/jquery.waypoints.min.js"></script>
+<script src="../static/js/jquery.stellar.min.js"></script>
+<script src="../static/js/owl.carousel.min.js"></script>
+<script src="../static/js/jquery.magnific-popup.min.js"></script>
+<script src="../static/js/aos.js"></script>
+<script src="../static/js/jquery.animateNumber.min.js"></script>
+<script src="../static/js/bootstrap-datepicker.js"></script>
+<script src="../static/js/jquery.timepicker.min.js"></script>
+<script src="../static/js/scrollax.min.js"></script>
+{#  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>#}
+{#  <script src="../static/js/google-map.js"></script>#}
+<script src="../static/js/main.js"></script>
+
+
+</body>
+</html>
+<script>
+    $(document).ready(function (){
+      jump();
+    });
+    function clickToLogout() {
+        $.post('/api/logout', {}).done(function (response) {
+            let server_code = response['returnValue']
+            if (server_code == 1) {
+                // success set done
+                alert("You have been logged out")
+                window.location.href = '/main_page';
+            } else {
+                alert("You have not been logged out")
+                window.location.href = '/home';
+            }
+        }).fail(function () {
+            console.log("Fail reset");
+        })
+    }
+</script>
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/i18n/language.js"></script>
+<script src="../static/js/i18n/jquery.i18n.properties.js"></script>
+
